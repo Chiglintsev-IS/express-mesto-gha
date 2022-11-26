@@ -15,5 +15,4 @@ app.use(express.json());
 app.use('/cards', cardsRouter);
 app.use('/users', usersRouter);
 
-app.listen(PORT, () => {
-});
+app.listen(PORT);
