@@ -39,7 +39,7 @@ module.exports.likeCard = (req, res) => {
   Card.findByIdAndUpdate(
     cardId,
     { $addToSet: { likes: _id } },
-    { new: true },
+    { new: true, runValidators: true },
   )
     .then((card) => res.send({ data: card }))
     .catch((err) => {
@@ -61,7 +61,7 @@ module.exports.dislikeCard = (req, res) => {
   Card.findByIdAndUpdate(
     cardId,
     { $pull: { likes: _id } },
-    { new: true },
+    { new: true, runValidators: true },
   )
     .then((card) => res.send({ data: card }))
     .catch((err) => {
