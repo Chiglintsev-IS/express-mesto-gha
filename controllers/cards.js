@@ -3,7 +3,7 @@ const Card = require('../models/card');
 module.exports.getCards = (req, res) => {
   Card.find({})
     .then((cards) => res.send({ data: cards }))
-    .catch((err) => res.status(500).send({ message: err }));
+    .catch((err) => res.status(500).send({ message: err.message }));
 };
 
 module.exports.createCard = (req, res) => {
@@ -15,7 +15,7 @@ module.exports.createCard = (req, res) => {
         res.status(400).send({ message: 'Переданы некорректные данные при создании карточки.' });
         return;
       }
-      res.status(500).send({ message: err });
+      res.status(500).send({ message: err.message });
     });
 };
 
@@ -28,7 +28,7 @@ module.exports.deleteCard = (req, res) => {
         res.status(404).send({ message: 'Карточка с указанным _id не найдена.' });
         return;
       }
-      res.status(500).send({ message: err });
+      res.status(500).send({ message: err.message });
     });
 };
 
@@ -50,7 +50,7 @@ module.exports.likeCard = (req, res) => {
         res.status(400).send({ message: 'Переданы некорректные данные для постановки лайка.' });
         return;
       }
-      res.status(500).send({ message: err });
+      res.status(500).send({ message: err.message });
     });
 };
 
@@ -72,6 +72,6 @@ module.exports.dislikeCard = (req, res) => {
         res.status(400).send({ message: 'Переданы некорректные данные для снятия лайка.' });
         return;
       }
-      res.status(500).send({ message: err });
+      res.status(500).send({ message: err.message });
     });
 };

@@ -15,7 +15,7 @@ module.exports.getUserById = (req, res) => {
       if (err.name === 'CastError') {
         res.status(404).send({ message: 'Пользователь по указанному _id не найден.' });
       } else {
-        res.status(500).send({ message: err });
+        res.status(500).send({ message: err.message });
       }
     });
 };
@@ -29,7 +29,7 @@ module.exports.createUser = (req, res) => {
       if (err.name === 'ValidationError') {
         res.status(400).send({ message: 'Переданы некорректные данные при создании пользователя.' });
       } else {
-        res.status(500).send({ message: err });
+        res.status(500).send({ message: err.message });
       }
     });
 };
@@ -53,7 +53,7 @@ module.exports.updateUser = (req, res) => {
         res.status(400).send({ message: 'Переданы некорректные данные при обновлении профиля.' });
         return;
       }
-      res.status(500).send({ message: err });
+      res.status(500).send({ message: err.message });
     });
 };
 
@@ -76,6 +76,6 @@ module.exports.updateUserAvatar = (req, res) => {
         res.status(400).send({ message: 'Переданы некорректные данные при обновлении аватара.' });
         return;
       }
-      res.status(500).send({ message: err });
+      res.status(500).send({ message: err.message });
     });
 };
