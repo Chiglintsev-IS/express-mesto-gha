@@ -11,6 +11,15 @@ const app = express();
 mongoose.connect(mongodbUrl);
 
 app.use(appendUserId);
+
+// for tests pass
+app.use((req, res, next) => {
+  req.user = {
+    _id: '638256526d407fce8afeb603', // вставьте сюда _id созданного в предыдущем пункте пользователя
+  };
+  next();
+});
+
 app.use(express.json());
 app.use('/cards', cardsRouter);
 app.use('/users', usersRouter);
