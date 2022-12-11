@@ -26,7 +26,7 @@ module.exports.deleteCard = (req, res) => {
     .orFail(new Error('NotValidId'))
     .then((card) => res.send({ data: card }))
     .catch((err) => {
-      if (err.name === 'NotValidId') {
+      if (err.message === 'NotValidId') {
         res.status(404).send({ message: 'Карточка с указанным _id не найдена.' });
         return;
       }
@@ -49,7 +49,7 @@ module.exports.likeCard = (req, res) => {
     .orFail(new Error('NotValidId'))
     .then((card) => res.send({ data: card }))
     .catch((err) => {
-      if (err.name === 'NotValidId') {
+      if (err.message === 'NotValidId') {
         res.status(404).send({ message: 'Карточка с указанным _id не найдена.' });
         return;
       }
@@ -76,7 +76,7 @@ module.exports.dislikeCard = (req, res) => {
     .orFail(new Error('NotValidId'))
     .then((card) => res.send({ data: card }))
     .catch((err) => {
-      if (err.name === 'NotValidId') {
+      if (err.message === 'NotValidId') {
         res.status(404).send({ message: 'Карточка с указанным _id не найдена.' });
         return;
       }
