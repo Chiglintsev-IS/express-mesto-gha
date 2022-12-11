@@ -14,11 +14,7 @@ module.exports.getUserById = (req, res) => {
     .then((user) => res.send({ data: user }))
     .catch((err) => {
       if (err.message === 'NotValidId') {
-        res.status(404).send({ message: 'Карточка с указанным _id не найдена.' });
-        return;
-      }
-      if (err.name === 'CastError') {
-        res.status(400).send({ message: 'Пользователь по указанному _id не найден.' });
+        res.status(404).send({ message: 'Пользователь по указанному _id не найден.' });
         return;
       }
       res.status(500).send({ message: err.message });
@@ -48,10 +44,11 @@ module.exports.updateUser = (req, res) => {
     { name, about, avatar },
     { new: true, runValidators: true },
   )
+    .orFail(new Error('NotValidId'))
     .then((user) => res.send({ data: user }))
     .catch((err) => {
-      if (err.name === 'CastError') {
-        res.status(400).send({ message: 'Пользователь по указанному _id не найден.' });
+      if (err.message === 'NotValidId') {
+        res.status(404).send({ message: 'Пользователь по указанному _id не найден.' });
         return;
       }
       if (err.name === 'ValidationError') {
@@ -71,10 +68,11 @@ module.exports.updateUserAvatar = (req, res) => {
     { avatar },
     { new: true, runValidators: true },
   )
+    .orFail(new Error('NotValidId'))
     .then((user) => res.send({ data: user }))
     .catch((err) => {
-      if (err.name === 'CastError') {
-        res.status(400).send({ message: 'Пользователь по указанному _id не найден.' });
+      if (err.message === 'NotValidId') {
+        res.status(404).send({ message: 'Пользователь по указанному _id не найден.' });
         return;
       }
       if (err.name === 'ValidationError') {
