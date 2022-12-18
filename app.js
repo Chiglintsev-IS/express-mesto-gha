@@ -4,6 +4,7 @@ const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const usersRouter = require('./routes/users');
 const cardsRouter = require('./routes/cards');
+const {serverError} = require("./constants");
 
 const PORT = '3000';
 const mongodbUrl = 'mongodb://localhost:27017/mestodb';
@@ -31,7 +32,7 @@ app.use(express.json());
 app.use('/cards', cardsRouter);
 app.use('/users', usersRouter);
 app.all('*', (req, res) => {
-  res.status(404).send({ message: 'Запрашиваемый ресурс не найден' });
+  res.status(serverError.PAGE_NOT_FOUND.code).send({ message: serverError.PAGE_NOT_FOUND.message });
 });
 
 app.listen(PORT);
