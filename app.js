@@ -4,7 +4,7 @@ const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const usersRouter = require('./routes/users');
 const cardsRouter = require('./routes/cards');
-const {serverError} = require("./constants");
+const { serverError } = require('./constants');
 
 const PORT = '3000';
 const mongodbUrl = 'mongodb://localhost:27017/mestodb';

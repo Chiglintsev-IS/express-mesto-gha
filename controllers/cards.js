@@ -5,7 +5,11 @@ module.exports.getCards = (req, res) => {
   Card.find({})
     .populate(['owner', 'like'])
     .then((cards) => res.send({ data: cards }))
-    .catch((err) => res.status(serverError.COMMON.code).send({ message: serverError.COMMON.message }));
+    .catch(() => {
+      res
+        .status(serverError.COMMON.code)
+        .send({ message: serverError.COMMON.message });
+    });
 };
 
 module.exports.createCard = (req, res) => {
@@ -15,10 +19,14 @@ module.exports.createCard = (req, res) => {
     .then((card) => res.status(201).send({ data: card }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        res.status(cardErrors.VALIDATION_ERROR.code).send({ message: cardErrors.VALIDATION_ERROR.message });
+        res
+          .status(cardErrors.VALIDATION_ERROR.code)
+          .send({ message: cardErrors.VALIDATION_ERROR.message });
         return;
       }
-      res.status(serverError.COMMON.code).send({ message: serverError.COMMON.message });
+      res
+        .status(serverError.COMMON.code)
+        .send({ message: serverError.COMMON.message });
     });
 };
 
@@ -29,14 +37,20 @@ module.exports.deleteCard = (req, res) => {
     .then((card) => res.send({ data: card }))
     .catch((err) => {
       if (err.message === 'notFoundId') {
-        res.status(cardErrors.NOT_FOUND_ID.code).send({ message: cardErrors.NOT_FOUND_ID.message });
+        res
+          .status(cardErrors.NOT_FOUND_ID.code)
+          .send({ message: cardErrors.NOT_FOUND_ID.message });
         return;
       }
       if (err.name === 'CastError') {
-        res.status(cardErrors.CAST_ERROR.code).send({ message: cardErrors.CAST_ERROR.message});
+        res
+          .status(cardErrors.CAST_ERROR.code)
+          .send({ message: cardErrors.CAST_ERROR.message });
         return;
       }
-      res.status(serverError.COMMON.code).send({ message: serverError.COMMON.message });
+      res
+        .status(serverError.COMMON.code)
+        .send({ message: serverError.COMMON.message });
     });
 };
 
@@ -53,14 +67,20 @@ module.exports.likeCard = (req, res) => {
     .then((card) => res.send({ data: card }))
     .catch((err) => {
       if (err.message === 'notFoundId') {
-        res.status(cardErrors.NOT_FOUND_ID.code).send({ message: cardErrors.NOT_FOUND_ID.message });
+        res
+          .status(cardErrors.NOT_FOUND_ID.code)
+          .send({ message: cardErrors.NOT_FOUND_ID.message });
         return;
       }
       if (err.name === 'CastError') {
-        res.status(cardErrors.CAST_ERROR.code).send({ message: cardErrors.CAST_ERROR.message });
+        res
+          .status(cardErrors.CAST_ERROR.code)
+          .send({ message: cardErrors.CAST_ERROR.message });
         return;
       }
-      res.status(serverError.COMMON.code).send({ message: serverError.COMMON.message });
+      res
+        .status(serverError.COMMON.code)
+        .send({ message: serverError.COMMON.message });
     });
 };
 
@@ -77,13 +97,19 @@ module.exports.dislikeCard = (req, res) => {
     .then((card) => res.send({ data: card }))
     .catch((err) => {
       if (err.message === 'notFoundId') {
-        res.status(cardErrors.NOT_FOUND_ID.code).send({ message: cardErrors.NOT_FOUND_ID.message });
+        res
+          .status(cardErrors.NOT_FOUND_ID.code)
+          .send({ message: cardErrors.NOT_FOUND_ID.message });
         return;
       }
       if (err.name === 'CastError') {
-        res.status(cardErrors.CAST_ERROR.code).send({ message: cardErrors.CAST_ERROR.message });
+        res
+          .status(cardErrors.CAST_ERROR.code)
+          .send({ message: cardErrors.CAST_ERROR.message });
         return;
       }
-      res.status(serverError.COMMON.code).send({ message: serverError.COMMON.message });
+      res
+        .status(serverError.COMMON.code)
+        .send({ message: serverError.COMMON.message });
     });
 };
