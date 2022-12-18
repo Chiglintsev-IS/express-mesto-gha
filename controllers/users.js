@@ -4,7 +4,7 @@ const { userErrors, serverError } = require('../constants');
 module.exports.getUsers = (req, res) => {
   User.find({})
     .then((users) => res.send({ data: users }))
-    .catch(() => res.status(500).send({ message: serverError.common }));
+    .catch(() => res.status(500).send({ message: serverError.COMMON }));
 };
 
 module.exports.getUserById = (req, res) => {
@@ -15,14 +15,14 @@ module.exports.getUserById = (req, res) => {
     .then((user) => res.send({ data: user }))
     .catch((err) => {
       if (err.message === 'notFoundId') {
-        res.status(404).send({ message: userErrors.notFoundId });
+        res.status(404).send({ message: userErrors.NOT_FOUND_ID });
         return;
       }
       if (err.name === 'CastError') {
-        res.status(400).send({ message: userErrors.CastError });
+        res.status(400).send({ message: userErrors.CAST_ERROR });
         return;
       }
-      res.status(500).send({ message: serverError.common });
+      res.status(500).send({ message: serverError.COMMON });
     });
 };
 
@@ -33,9 +33,9 @@ module.exports.createUser = (req, res) => {
     .then((user) => res.send({ data: user }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        res.status(400).send({ message: userErrors.ValidationError });
+        res.status(400).send({ message: userErrors.VALIDATION_ERROR });
       } else {
-        res.status(500).send({ message: serverError.common });
+        res.status(500).send({ message: serverError.COMMON });
       }
     });
 };
@@ -53,14 +53,14 @@ module.exports.updateUser = (req, res) => {
     .then((user) => res.send({ data: user }))
     .catch((err) => {
       if (err.message === 'notFoundId') {
-        res.status(400).send({ message: userErrors.notFoundId });
+        res.status(400).send({ message: userErrors.NOT_FOUND_ID });
         return;
       }
       if (err.name === 'ValidationError') {
-        res.status(400).send({ message: userErrors.ValidationError });
+        res.status(400).send({ message: userErrors.VALIDATION_ERROR });
         return;
       }
-      res.status(500).send({ message: serverError.common });
+      res.status(500).send({ message: serverError.COMMON });
     });
 };
 
@@ -77,13 +77,13 @@ module.exports.updateUserAvatar = (req, res) => {
     .then((user) => res.send({ data: user }))
     .catch((err) => {
       if (err.message === 'notFoundId') {
-        res.status(400).send({ message: userErrors.notFoundId });
+        res.status(400).send({ message: userErrors.NOT_FOUND_ID });
         return;
       }
       if (err.name === 'ValidationError') {
-        res.status(400).send({ message: userErrors.ValidationError });
+        res.status(400).send({ message: userErrors.VALIDATION_ERROR });
         return;
       }
-      res.status(500).send({ message: serverError.common });
+      res.status(500).send({ message: serverError.COMMON });
     });
 };
